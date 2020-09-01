@@ -1,17 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
-  selector: 'app-usd',
-  templateUrl: './usd.component.html'
+  selector: "app-usd",
+  templateUrl: "./usd.component.html",
 })
 export class USDComponent {
   yenDisplayText: number;
-  constructor() { }
+  @Input() usd: number;
+  @Output() fromUsd = new EventEmitter<number>();
+  constructor() {}
 
   convertToYen(newUsd) {
+    this.yenDisplayText = newUsd * 113;
+    this.fromUsd.emit(this.yenDisplayText);
   }
 
   getYenDisplayText() {
-    return 0;
+    return this.yenDisplayText;
   }
 }
